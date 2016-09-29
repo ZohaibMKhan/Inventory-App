@@ -15,9 +15,8 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.example.android.inventoryapp.R;
-import com.example.android.inventoryapp.data.InventoryContract;
 import com.example.android.inventoryapp.data.InventoryDbHelper;
-
+import com.example.android.inventoryapp.data.InventoryContract.InventoryEntry;
 /**
  * Created by Zohaib on 28/09/16.
  */
@@ -41,24 +40,27 @@ public class ItemCursorAdapter extends CursorAdapter {
         final Button sold = (Button) view.findViewById(R.id.sell_button);
         sold.setTag(cursor.getLong(0));
 
+        //Log.v("Adapter", "cursors ID: " + cursor.getLong(0));
+
         sold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI,
+                Uri uri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI,
                         Long.parseLong(sold.getTag().toString()));
                 Log.v("Adapter", "uri: " + uri.toString());
                 Log.v("Adapter", "id: " + sold.getTag());
-                int quantity = cursor.getInt(cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY));
+                cursor.moveToPosition(Integer.parseInt(sold.getTag().toString()));
+                int quantity = cursor.getInt(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_QUANTITY));
                 Log.v("Adapter", "quantity: " + quantity);
                 ContentValues values = new ContentValues();
-                values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY, quantity);
+                values.put(InventoryEntry.COLUMN_ITEM_QUANTITY, quantity);
                 context.getContentResolver().update(uri,values, null, null);
             }
         });
 
-        String name = cursor.getString(cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME));
-        String quantity = cursor.getString(cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY));
-        String price = cursor.getString(cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE));
+        String name = cursor.getString(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_NAME));
+        String quantity = cursor.getString(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_QUANTITY));
+        String price = cursor.getString(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_PRICE));
 
         tvname.setText(name);
         tvquantity.setText("Quantity: " + quantity);
