@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Inventory App</string>
+    <string name="empty_text_view_text">Press the \'+\' Button to add an Item</string>
+    <string name="add_item_text">Add Item</string>
+    <string name="edit_item_text">Edit Item</string>
+    <string name="error_saving_item">Error</string>
+    <string name="editor_item_saved_successful">Item was saved</string>
+    <string name="incomplete_entered_text">Please fill in the form properly</string>
+</resources>
