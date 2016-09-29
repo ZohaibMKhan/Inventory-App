@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -41,10 +42,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Log.v("MainActivity", "Pressed a list item");
                 Intent intent = new Intent(MainActivity.this, EditProduct.class);
                 Uri uri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, id);
+                Log.v("MainActivity", "id: " + id);
                 intent.setData(uri);
                 startActivity(intent);
+
             }
         });
         getLoaderManager().initLoader(0, null, this);

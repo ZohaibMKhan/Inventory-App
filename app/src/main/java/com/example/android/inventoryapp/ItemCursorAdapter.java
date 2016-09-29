@@ -39,23 +39,20 @@ public class ItemCursorAdapter extends CursorAdapter {
         TextView tvquantity = (TextView) view.findViewById(R.id.quantity);
         TextView tvprice = (TextView) view.findViewById(R.id.price);
         final Button sold = (Button) view.findViewById(R.id.sell_button);
-
-        Log.v("Adapter", "id: " + cursor.getLong(0));
-        sold.setFocusable(false);
+        sold.setTag(cursor.getLong(0));
 
         sold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, cursor.getLong(0));
+                Uri uri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI,
+                        Long.parseLong(sold.getTag().toString()));
                 Log.v("Adapter", "uri: " + uri.toString());
+                Log.v("Adapter", "id: " + sold.getTag());
                 int quantity = cursor.getInt(cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY));
                 Log.v("Adapter", "quantity: " + quantity);
                 ContentValues values = new ContentValues();
-                quantity--;
-                values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE, quantity);
+                values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY, quantity);
                 context.getContentResolver().update(uri,values, null, null);
-
-
             }
         });
 
