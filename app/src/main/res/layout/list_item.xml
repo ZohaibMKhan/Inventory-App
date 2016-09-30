@@ -1,43 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
-    android:id="@+id/list_item">
+    android:descendantFocusability="blocksDescendants">
 
     <ImageView
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:id="@+id/thumbnail"
         android:layout_width="88dp"
         android:layout_height="88dp"
-        android:src="@drawable/ic_add_white_24dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_add_white_24dp" />
 
     <LinearLayout
-        android:padding="8dp"
         android:id="@+id/text_view_group"
-        android:layout_toRightOf="@id/thumbnail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_toRightOf="@id/thumbnail"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:text="name"
-        style="?android:textAppearanceMedium"/>
+        <TextView
+            android:id="@+id/name"
+            style="?android:textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/quantity"
-        android:text="quantity"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/price"
-        android:text="price"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quantity_list_item_text" />
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/list_view_price_text" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <Button
@@ -47,6 +69,6 @@
         android:layout_alignRight="@id/text_view_group"
         android:layout_centerVertical="true"
         android:layout_margin="16dp"
-        android:text="SOLD"/>
+        android:text="SOLD" />
 
 </RelativeLayout>

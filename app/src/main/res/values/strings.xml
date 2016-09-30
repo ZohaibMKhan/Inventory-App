@@ -6,4 +6,12 @@
     <string name="error_saving_item">Error</string>
     <string name="editor_item_saved_successful">Item was saved</string>
     <string name="incomplete_entered_text">Please fill in the form properly</string>
+    <string name="quantity_list_item_text">"Quantity: "</string>
+    <string name="list_view_price_text">"Price: "</string>
+    <string name="name_editor">Name:</string>
+    <string name="e_g_chocolates">e.g. Chocolates</string>
+    <string name="quantity">Quantity:</string>
+    <string name="e_g_15">e.g. 15</string>
+    <string name="price">Price:</string>
+    <string name="e_g_5">e.g. 5</string>
 </resources>

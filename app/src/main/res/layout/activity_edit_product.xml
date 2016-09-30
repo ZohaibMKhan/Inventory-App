@@ -10,24 +10,69 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.inventoryapp.EditProduct">
 
-    <EditText
-        android:id="@+id/name_editable"
-        android:layout_width="160dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="name" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/quantity_editable"
-        android:layout_width="160dp"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="16dp"
+            android:text="@string/name_editor"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/name_editable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="@string/e_g_chocolates" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="quantity"
-        android:inputType="number" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/price_editable"
-        android:layout_width="160dp"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="16dp"
+            android:text="@string/quantity"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/quantity_editable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="@string/e_g_15"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="price"
-        android:inputType="number" />
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="16dp"
+            android:text="@string/price"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/price_editable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint="@string/e_g_5"
+            android:inputType="number" />
+    </LinearLayout>
 </LinearLayout>

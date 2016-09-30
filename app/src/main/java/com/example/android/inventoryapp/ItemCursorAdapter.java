@@ -4,7 +4,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +13,6 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-import com.example.android.inventoryapp.R;
-import com.example.android.inventoryapp.data.InventoryDbHelper;
 import com.example.android.inventoryapp.data.InventoryContract.InventoryEntry;
 
 /**
@@ -27,8 +24,6 @@ public class ItemCursorAdapter extends CursorAdapter {
         super(context, c, 0);
     }
 
-    private int currentId = 0;
-
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
         return LayoutInflater.from(context).inflate(R.layout.list_item, viewGroup, false);
@@ -36,18 +31,18 @@ public class ItemCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, final Context context, final Cursor cursor) {
-        TextView tvname = (TextView) view.findViewById(R.id.name);
-        TextView tvquantity = (TextView) view.findViewById(R.id.quantity);
-        TextView tvprice = (TextView) view.findViewById(R.id.price);
-        final Button sold = (Button) view.findViewById(R.id.sell_button);
-        sold.setTag(cursor.getLong(0));
+        TextView textViewName = (TextView) view.findViewById(R.id.name);
+        TextView textViewQuantity = (TextView) view.findViewById(R.id.quantity);
+        TextView textViewPrice = (TextView) view.findViewById(R.id.price);
+        final Button sellButton = (Button) view.findViewById(R.id.sell_button);
+        sellButton.setTag(cursor.getLong(cursor.getColumnIndex(InventoryEntry._ID)));
 
-        sold.setOnClickListener(new View.OnClickListener() {
+        sellButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Uri uri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI,
-                        Long.parseLong(sold.getTag().toString()));
-                cursor.moveToPosition(Integer.parseInt(sold.getTag().toString()) - 1);
+                        Long.parseLong(sellButton.getTag().toString()));
+                cursor.moveToPosition(Integer.parseInt(sellButton.getTag().toString()) - 1);
                 int quantity = cursor.getInt(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_QUANTITY));
                 ContentValues values = new ContentValues();
                 quantity--;
@@ -60,9 +55,9 @@ public class ItemCursorAdapter extends CursorAdapter {
         String quantity = cursor.getString(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_QUANTITY));
         String price = cursor.getString(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_PRICE));
 
-        tvname.setText(name);
-        tvquantity.setText("Quantity: " + quantity);
-        tvprice.setText("Price: £" + price);
+        textViewName.setText(name);
+        textViewQuantity.setText(quantity);
+        textViewPrice.setText(price);
 
     }
 }
