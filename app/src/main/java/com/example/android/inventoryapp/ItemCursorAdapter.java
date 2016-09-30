@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.android.inventoryapp.R;
 import com.example.android.inventoryapp.data.InventoryDbHelper;
 import com.example.android.inventoryapp.data.InventoryContract.InventoryEntry;
+
 /**
  * Created by Zohaib on 28/09/16.
  */
@@ -27,6 +28,7 @@ public class ItemCursorAdapter extends CursorAdapter {
     }
 
     private int currentId = 0;
+
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
         return LayoutInflater.from(context).inflate(R.layout.list_item, viewGroup, false);
@@ -40,21 +42,17 @@ public class ItemCursorAdapter extends CursorAdapter {
         final Button sold = (Button) view.findViewById(R.id.sell_button);
         sold.setTag(cursor.getLong(0));
 
-        //Log.v("Adapter", "cursors ID: " + cursor.getLong(0));
-
         sold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Uri uri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI,
                         Long.parseLong(sold.getTag().toString()));
-                Log.v("Adapter", "uri: " + uri.toString());
-                Log.v("Adapter", "id: " + sold.getTag());
-                cursor.moveToPosition(Integer.parseInt(sold.getTag().toString()));
+                cursor.moveToPosition(Integer.parseInt(sold.getTag().toString()) - 1);
                 int quantity = cursor.getInt(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_QUANTITY));
-                Log.v("Adapter", "quantity: " + quantity);
                 ContentValues values = new ContentValues();
+                quantity--;
                 values.put(InventoryEntry.COLUMN_ITEM_QUANTITY, quantity);
-                context.getContentResolver().update(uri,values, null, null);
+                context.getContentResolver().update(uri, values, null, null);
             }
         });
 

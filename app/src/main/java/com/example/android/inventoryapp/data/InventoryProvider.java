@@ -179,14 +179,14 @@ public class InventoryProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case ITEMS:
-                return updatePet(uri, contentValues, selection, selectionArgs);
+                return updateItem(uri, contentValues, selection, selectionArgs);
             case ITEM_ID:
                 // For the PET_ID code, extract out the ID from the URI,
                 // so we know which row to update. Selection will be "_id=?" and selection
                 // arguments will be a String array containing the actual ID.
                 selection = InventoryEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                return updatePet(uri, contentValues, selection, selectionArgs);
+                return updateItem(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
         }
@@ -197,7 +197,7 @@ public class InventoryProvider extends ContentProvider {
      * specified in the selection and selection arguments (which could be 0 or 1 or more pets).
      * Return the number of rows that were successfully updated.
      */
-    private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    private int updateItem(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
         if (values.containsKey(InventoryEntry.COLUMN_ITEM_NAME)) {
             // Check that the name is not null
@@ -209,7 +209,7 @@ public class InventoryProvider extends ContentProvider {
 
         if (values.containsKey(InventoryEntry.COLUMN_ITEM_QUANTITY)) {
             Integer quantity = values.getAsInteger(InventoryEntry.COLUMN_ITEM_QUANTITY);
-            if (quantity != null && quantity < 0) {
+            if (quantity == null || quantity < 0) {
                 throw new IllegalArgumentException("Item requires valid quantity");
             }
         }
@@ -217,7 +217,7 @@ public class InventoryProvider extends ContentProvider {
         if (values.containsKey(InventoryEntry.COLUMN_ITEM_PRICE)) {
             // If the weight is provided, check that it's greater than or equal to 0 kg
             Integer price = values.getAsInteger(InventoryEntry.COLUMN_ITEM_PRICE);
-            if (price != null && price < 0) {
+            if (price == null || price < 0) {
                 throw new IllegalArgumentException("Item requires valid price");
             }
         }
