@@ -19,11 +19,11 @@ public class InventoryContract {
 
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_INVENTORY);
 
-        /** Name of database table for pets */
+        /** Name of database table for items */
         public final static String TABLE_NAME = "inventory";
 
         /**
-         * Unique ID number for the pet (only for use in the database table).
+         * Unique ID number for the item (only for use in the database table).
          *
          * Type: INTEGER
          */
@@ -34,6 +34,10 @@ public class InventoryContract {
         public final static String COLUMN_ITEM_QUANTITY = "quantity";
 
         public final static String COLUMN_ITEM_PRICE= "price";
+
+        public final static String COLUMN_ITEM_IMAGE = "image";
+
+        public final static String COLUMN_ITEM_SUPPLIER = "supplier";
 
 
     }

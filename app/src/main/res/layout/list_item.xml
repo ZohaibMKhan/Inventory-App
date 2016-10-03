@@ -9,15 +9,17 @@
         android:id="@+id/thumbnail"
         android:layout_width="88dp"
         android:layout_height="88dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="@string/image_of_the_item_image_description"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_add_white_24dp" />
 
     <LinearLayout
         android:id="@+id/text_view_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/thumbnail"
+        android:layout_toEndOf="@id/thumbnail"
         android:orientation="vertical"
         android:padding="8dp">
 
@@ -25,8 +27,7 @@
             android:id="@+id/name"
             style="?android:textAppearanceMedium"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="name" />
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -66,9 +67,9 @@
         android:id="@+id/sell_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/text_view_group"
+        android:layout_alignEnd="@id/text_view_group"
         android:layout_centerVertical="true"
         android:layout_margin="16dp"
-        android:text="SOLD" />
+        android:text="@string/sold_text_button" />
 
 </RelativeLayout>

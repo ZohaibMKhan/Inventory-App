@@ -3,6 +3,8 @@ package com.example.android.inventoryapp.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import com.example.android.inventoryapp.data.InventoryContract.InventoryEntry;
 
 /**
@@ -20,16 +22,20 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create a String that contains the SQL statement to create the pets table
-        String SQL_CREATE_INVENTORY_TABLE =  "CREATE TABLE " + InventoryEntry.TABLE_NAME + " ("
+        // Create a String that contains the SQL statement to create the items table
+        String SQL_CREATE_INVENTORY_TABLE = "CREATE TABLE " + InventoryEntry.TABLE_NAME + " ("
                 + InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + InventoryEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, "
                 + InventoryEntry.COLUMN_ITEM_PRICE + " INTEGER NOT NULL DEFAULT 0, "
-                + InventoryEntry.COLUMN_ITEM_QUANTITY+ " INTEGER NOT NULL DEFAULT 0);";
+                + InventoryEntry.COLUMN_ITEM_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
+                + InventoryEntry.COLUMN_ITEM_IMAGE + " TEXT NOT NULL, "
+                + InventoryEntry.COLUMN_ITEM_SUPPLIER + " TEXT NOT NULL"
+                + ");";
+
+        Log.v("DbHelper", SQL_CREATE_INVENTORY_TABLE);
 
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_INVENTORY_TABLE);
-
     }
 
     @Override

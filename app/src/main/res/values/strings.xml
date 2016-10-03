@@ -3,7 +3,7 @@
     <string name="empty_text_view_text">Press the \'+\' Button to add an Item</string>
     <string name="add_item_text">Add Item</string>
     <string name="edit_item_text">Edit Item</string>
-    <string name="error_saving_item">Error</string>
+    <string name="error_saving_item">Error inserting result into database</string>
     <string name="editor_item_saved_successful">Item was saved</string>
     <string name="incomplete_entered_text">Please fill in the form properly</string>
     <string name="quantity_list_item_text">"Quantity: "</string>
@@ -14,4 +14,16 @@
     <string name="e_g_15">e.g. 15</string>
     <string name="price">Price:</string>
     <string name="e_g_5">e.g. 5</string>
+    <string name="received_shipment">Received shipment</string>
+    <string name="track_a_sale">track a sale</string>
+    <string name="order_from_supplier">order from supplier</string>
+    <string name="delete_item">delete item</string>
+    <string name="enter_number_of_items_received">Enter number of items received</string>
+    <string name="choose_image">Choose image...</string>
+    <string name="supplier">Supplier:</string>
+    <string name="e_g_john_email_com">e.g. john@email.com</string>
+    <string name="image_of_the_item_image_description">Image of the item</string>
+    <string name="sold_text_button">SOLD</string>
+    <string name="item_request_intent_text">Item Request</string>
+    <string name="supply_request_string">Hey, \nI need more supplies.</string>
 </resources>
