@@ -122,14 +122,39 @@ public class EditProduct extends AppCompatActivity implements LoaderManager.Load
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteCurrentItem();
+                showDeleteConfirmationDialog();
             }
         });
     }
 
-    private void deleteCurrentItem() {
+    private void showDeleteConfirmationDialog() {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete this item?");
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Delete" button, so delete the item.
+                deleteCurrentItem();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Cancel" button, so dismiss the dialog
+                // and continue editing the item.
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
 
-        getContentResolver().delete(currentItemUri,null, null);
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void deleteCurrentItem() {
+        getContentResolver().delete(currentItemUri, null, null);
         finish();
         return;
     }
@@ -235,7 +260,11 @@ public class EditProduct extends AppCompatActivity implements LoaderManager.Load
                     shipmentValueToSubtract = 0;
                 }
                 ContentValues values = new ContentValues();
-                values.put(InventoryEntry.COLUMN_ITEM_QUANTITY, currentStock - shipmentValueToSubtract);
+                if (currentStock - shipmentValueToSubtract >= 0) {
+                    values.put(InventoryEntry.COLUMN_ITEM_QUANTITY, currentStock - shipmentValueToSubtract);
+                } else {
+                    values.put(InventoryEntry.COLUMN_ITEM_QUANTITY, 0);
+                }
                 getContentResolver().update(currentItemUri, values, null, null);
             }
         });

@@ -54,7 +54,9 @@ public class ItemCursorAdapter extends CursorAdapter {
                 cursor.moveToPosition(Integer.parseInt(sellButton.getTag().toString()) - 1);
                 int quantity = cursor.getInt(cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_QUANTITY));
                 ContentValues values = new ContentValues();
-                quantity--;
+                if (quantity > 0) {
+                    quantity--;
+                }
                 values.put(InventoryEntry.COLUMN_ITEM_QUANTITY, quantity);
                 context.getContentResolver().update(uri, values, null, null);
             }
